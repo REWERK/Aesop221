@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>นิทานอีสป</title>
+	<link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
+<!--
+    
+TemplateMo 553 Xtra Blog
+
+https://templatemo.com/tm-553-xtra-blog
+
+-->
+</head>
+<body>
+	<header class="tm-header" id="tm-header">
+        <div class="tm-header-wrapper">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-site-header">
+                <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-book-open fa-2x"></i></div>            
+                <h1 class="text-center">Aesop's Fables</h1>
+                <p class="text-center text-white">( นิทานอีสป )</p>
+            </div>
+            <nav class="tm-nav" id="tm-nav">            
+                <ul>
+                    <li class="tm-nav-item"><a href="index.html" class="tm-nav-link">
+                        <i class="fas fa-home"></i>
+                         Home
+                    </a></li>
+                    <li class="tm-nav-item active"><a href="search.html" class="tm-nav-link">
+                        <i class="fas fa-search"></i>
+                         Search
+                    </a></li>
+                    <li class="tm-nav-item"><a href="post-1.html" class="tm-nav-link">
+                        <i class="fas fa-pen"></i>
+                        New Story
+                    </a></li>
+                    <li class="tm-nav-item"><a href="about.html" class="tm-nav-link">
+                        <i class="fas fa-users"></i>
+                        About 
+                    </a></li>
+                    <li class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
+                        <i class="far fa-comments"></i>
+                        Contact Us
+                    </a></li>                   
+ <li class="tm-nav-item"><a href="sort.html" class="tm-nav-link">
+                        <i class="fas fa-sort"></i>
+                        Sort
+                    </a></li>
+                </ul>
+            </nav>
+            <div class="tm-mb-65">
+                <a href="https://facebook.com" class="tm-social-link">
+                    <i class="fab fa-facebook tm-social-icon"></i>
+                </a>
+                <a href="https://twitter.com" class="tm-social-link">
+                    <i class="fab fa-twitter tm-social-icon"></i>
+                </a>
+                <a href="https://instagram.com" class="tm-social-link">
+                    <i class="fab fa-instagram tm-social-icon"></i>
+                </a>
+                <a href="https://linkedin.com" class="tm-social-link">
+                    <i class="fab fa-linkedin tm-social-icon"></i>
+                </a>
+            </div>
+            <p class="tm-mb-80 pr-5 text-white">
+                 Binary Seacrh Algorithm 
+            </p>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <main class="tm-main">
+            <!-- Search form -->
+            <div class="row tm-row">
+                <div class="col-12">
+                    <form id="form" method="GET" class="form-inline tm-mb-80 tm-search-form" action=search.html action=search.html>
+                        <input id="search" class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <button class="tm-search-button" type="submit">
+                            <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>                
+            </div>
+            <div class="row tm-row" id="result"></div> 
+        </main>
+    </div>     
+    <script src="js/jquery.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+    <script type="module">
+        const searchValue = new URLSearchParams(window.location.search).get("query")
+        search.value = searchValue
+
+        import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.esm.js'
+        if (searchValue){
+            const list = [{name:'กระต่ายกับเต่า',href:'post-1.html' ,image:'img/img-01.jpg',sum:'กระต่ายตัวหนึ่งดูถูกในความคลานได้ช้าต้วมเตี้ยมของเต่า จึงได้ท้าทายให้เต่าวิ่งแข่งกับตน...',date:'Nov. 12, 2021'}, 
+                        {name:'ราชสีห์กับหนู',href:'post-2.html' ,image:'img/img-02.jpg',sum:'สิงโตกำลังนอนหลับอย่างสบายใจ อยู่ๆก็มีหนูตัวหนึ่งไต่ขึ้นไปบนหลังของสิงโตและวิ่งเล่นอยู่บนนั้น...',date:'Nov. 8, 2021'}, 
+                        {name:'สุนัขกับเงา',href:'post-3.html' ,image:'img/img-09.jpg',sum:'ในวันหนึ่ง มีสุนัขตัวหนึ่งกำลังคาบชิ้นเนื้ออยู่ในปากและกำลังข้ามสะพานอยู่ เมื่อเขามองลงไปในแม่น้ำก็พบว่ามีสุนัขอีกตัวกำลังคาบชิ้นเนื้ออยู่ในปากเหมือนกัน...',date:'Nov. 6, 2021'}, 
+                        {name:'ลากับหมาป่า',href:'post-4.html' ,image:'img/img-03.jpg',sum:'ในวันหนึ่ง ขณะที่ลากำลังหากินในทุ่งหญ้า เขาเห็นหมาป่าตัวหนึ่งกำลังมาหาเขา ลาจึงได้แกล้งทำเป็นบาดเจ็บ หมาป่าเข้ามาหาลา...',date:'Nov. 1, 2021'}, 
+                        {name:'เทพเฮอร์มีสกับช่างฝีมือ',href:'post-5.html' ,image:'img/img-04.jpg',sum:'กาลครั้งหนึ่ง เทพเจ้าซุสได้สั่งให้เทพเฮอร์มีส ใช้ “ยาแห่งการโกหก” ให้กับช่างฝีมือทุกคน เฮอร์มีสบดยาแบ่งเท่า ๆ กันแล้วนำไปใส่ให้ช่างฝีมือทีละคน...',date:'Oct. 30, 2021'}, 
+                        {name:'หมาป่ากับคนเลี้ยงแกะ',href:'post-6.html' ,image:'img/img-05.jpg',sum:'เด็กเลี้ยงแกะพบลูกหมาป่า จึงได้เก็บพวกมันมาเลี้ยง “ถ้าฉันเลี้ยงหมาป่าพวกนี้ เมื่อพวกเขาโตขึ้นจะได้ช่วยเลี้ยงแกะทั้งฝูงหรือพวกเขาอาจจะเอาแกะจากฟาร์มอื่นมาด้วยก็ได้”',date:'Oct.27, 2021'}, 
+                        {name:'นกนางแอ่นขี้โม้กับอีกา',href:'post-7.html' ,image:'img/img-06.jpg',sum:'มีนกนางแอ่นและอีกาชวบพูดอวดกันทั้งคู่ หลังจากที่ฟังนกนางแอ่นพูดเกี่ยวกับตัวเองแล้วอีกาก็พูดกลับไปว่า...',date:'Oct. 23, 2021'}, 
+                        {name:'แม่ที่รวยกับผู้หญิงที่ร้องไห้',href:'post-8.html' ,image:'img/img-07.jpg',sum:'มีแม่ที่รวยคนหนึ่งมีลูกสาวสองคน เมื่อลูกสาวคนหนึ่งจากไป...',date:'Oct. 20, 2021'}, 
+                        {name:'หนูกับวัวกระทิง',href:'post-9.html' ,image:'img/img-08.jpg',sum:'เจ้าวัวกระทิงโกรธเมื่อหนูกัดเขา เขาจึงพยายามจับหนู...',date:'Oct. 16, 2021'}, 
+                        {name:'สามีขี้เมากับภรรยาของเขา',href:'post-10.html' ,image:'img/img-10.jpg',sum:'มีภรรยาคนหนึ่งทุกข์ใจจากสามีที่ดื่มเหล้ามากเกินไป เธอต้องการให้เขาเลิกนิสัยไม่ดีนี้ ดังนั้นเธอจึงคิดแผนบางอย่าง...',date:'Oct. 14, 2021'}, 
+                        {name:'มดกับนกพิราบ',href:'post-11.html' ,image:'img/img-11.jpg',sum:'มดตัวหนึ่งลงมาที่น้ำพุเพื่อดื่มน้ำ เขาพลาดท่าตกลงไปในน้ำพุและเกือบจะจมน้ำ นกพิราบที่สังเกตเห็นเหตุการณ์ทั้งหมดได้หักกิ่งไม้เล็ก ๆ...',date:'Oct. 12, 2021'}, 
+                        {name:'ลากับผิวหนังสิงโต',href:'post-12.html' ,image:'img/img-12.jpg',sum:'มีลาตัวหนึ่ง ได้นำผิวหนังสิงโตมาคลุมตัวเองไว้ แล้วเดินไปมาเพื่อคุกคามสัตว์อื่น ๆ หลังจากนั้นไม่นานสุนัขจิ้งจอกก็ปรากฏตัวขึ้น...',date:'Oct. 9, 2021'}, 
+                        {name:'หมาป่ากับคนเลี้ยงแกะ',href:'post-13.html' ,image:'img/img-13.jpg',sum:'มีหมาป่าตัวหนึ่งกำลังเดินติดตามฝูงแกะ แต่เขาไม่ได้โจมตีพวกมัน คนเลี้ยงแกะคิดว่าหมาป่าเป็นภัยคุกคาม ดังนั้นเขาจึงเฝ้าดูแลแกะอย่างกลัวๆ...',date:'Oct. 5, 2021'}, 
+                        {name:'เหยี่ยวดำกับงู',href:'post-14.html' ,image:'img/img-14.jpg',sum:'เหยี่ยวดำจับงูแล้วบินขึ้นไปบนฟ้า งูตัวนั้นพันตัวอยู่รอบ ๆ เหยี่ยวดำ แล้วได้กัดไปที่เหยี่ยวดำด้วย...',date:'Oct. 3, 2021'}, 
+                        {name:'อีกากับเทพเจ้าเฮอร์มีส',href:'post-15.html' ,image:'img/img-15.jpg',sum:'มีอีกาตัวหนึ่ง ติดอยู่ที่กับดัก ได้ขอร้องเทพเจ้าอพอลโลว่า “ถ้าคุณจะช่วยฉันให้พ้นจากกับดักนี้ฉันจะจุดธูปและบูชาคุณ”...',date:'Sep. 28, 2021'}, 
+                        {name:'หงส์ที่เข้าใจผิดว่าตัวเองเป็นห่าน',href:'post-16.html' ,image:'img/img-16.jpg',sum:'เศรษฐีคนหนึ่งได้เลี้ยงทั้งห่านและหงส์ เขาเลี้ยงห่านเพื่อเป็นอาหารในอนาคตของเขา และเลี้ยงหงส์เพื่อส่งเสียงไพเราะ...',date:'Sep. 26, 2021'}, 
+                        {name:'ดอกกุหลาบกับดอกซีโลเซีย',href:'post-17.html' ,image:'img/img-17.jpg',sum:'ดอกซีโลเซียกำลังเบ่งบานอยู่ถัดจากดอกกุหลาบ และได้กล่าวกับดอกกุหลาบว่า...',date:'Sep. 24, 2021'}, 
+                        {name:'นกยูงกับอีกา',href:'post-18.html' ,image:'img/img-18.jpg',sum:'พวกนกทั้งหลายกำลังหารือกันเพื่อเลือกราชาของพวกเขา แล้วนกยูงก็พูดว่า “ฉันสวยดังนั้นฉันต้องเป็นราชา”...',date:'Sep. 18, 2021'}, 
+                        {name:'ปลาทูน่ากับโลมา',href:'post-19.html' ,image:'img/img-19.jpg',sum:'เสียงของปลาทูน่าที่กำลังว่ายน้ำหนีโลมาอย่างหมดหวัง อย่างไรก็ตามโลมากำลังเข้ามาใกล้มากขึ้นเรื่อย ๆ ...',date:'Sep. 16, 2021'}, 
+                        {name:'สุนัขจิ้งจอกกับเสือดาว',href:'post-20.html' ,image:'img/img-20.jpg',sum:'สุนัขจิ้งจอกกับเสือดาวกำลังโต้เถียงกัน ว่าใครสวยงามกว่ากัน...',date:'Sep. 13, 2021'}, 
+                        {name:'กบสองตัว',href:'post-21.html' ,image:'img/img-21.jpg',sum:'มีกบสองตัวอาศัยอยู่ในละแวกนั้น หนึ่งในนั้นอาศัยอยู่ริมสระน้ำลึกและใหญ่ห่างจากถนนเล็กน้อย...',date:'Sep. 8, 2021'}, 
+                        {name:'กากับเชือก',href:'post-22.html' ,image:'img/img-22.jpg',sum:'ชายคนหนึ่งจับอีกาได้ และได้ให้กับลูกของเขา โดยที่ใช้สายจูงผูกขาของมันเอาไว้...',date:'Sep. 6, 2021'}, 
+                        {name:'กาดำกับหงส์ขาว',href:'post-23.html' ,image:'img/img-23.jpg',sum:'เมื่ออีกามองไปที่หงส์ อีกาก็รู้สึกอิจฉาในขนสีขาวเหลือเกิน เขาคิดว่าหงส์ต้องล้างขนของตัวเองด้วยน้ำ...',date:'May 31, 2020'}, 
+                        {name:'เทพเจ้าแห่งสงครามกับเทพีแห่งความรุนแรง',href:'post-24.html' ,image:'img/img-24.jpg',sum:'เทพเจ้าทั้งหมดตัดสินใจที่จะแต่งงานและแต่ละคนก็เลือกคู่ของเขาโดยการจับฉลาก...',date:'June 16, 2020'}];
+            let options = {
+            shouldSort: true,
+            keys: ["name"],
+            threshold: 0.6,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            // don't include the keys property
+            };
+
+            const fuse = new Fuse(list, options);
+
+            let results = fuse.search(search.value);
+
+            result.innerHTML=""
+            var listLength = results.length;
+            for (var i = 0; i < listLength; i++) {
+            result.innerHTML = result.innerHTML +  `
+                <article class="col-12 col-md-6 tm-post">
+                    <hr class="tm-hr-primary">
+                    <a href="${results[i].item.href}" class="effect-lily tm-post-link tm-pt-20">
+                        <div class="tm-post-link-inner">
+                            <img src="${results[i].item.image}" alt="Image" class="img-fluid">                            
+                        </div>
+                        <span class="position-absolute tm-new-badge">New</span>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">${results[i].item.name}</h2>
+                    </a>                    
+                    <p class="tm-pt-30">
+                        ${results[i].item.sum}
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <span class="tm-color-primary"></span>
+                        <span class="tm-color-primary">${results[i].item.date}</span>
+                    </div>
+                    <hr>   
+                </article>`
+            //Do something
+}
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            // your options can be anything you want, but don't include
+            // the keys property
+            const list = [{name:'กระต่ายกับเต่า',href:'post-1.html' ,image:'img/img-01.jpg',sum:'กระต่ายตัวหนึ่งดูถูกในความคลานได้ช้าต้วมเตี้ยมของเต่า จึงได้ท้าทายให้เต่าวิ่งแข่งกับตน...',date:'Nov. 12, 2021'}, 
+                        {name:'ราชสีห์กับหนู',href:'post-2.html' ,image:'img/img-02.jpg',sum:'สิงโตกำลังนอนหลับอย่างสบายใจ อยู่ๆก็มีหนูตัวหนึ่งไต่ขึ้นไปบนหลังของสิงโตและวิ่งเล่นอยู่บนนั้น...',date:'Nov. 8, 2021'}, 
+                        {name:'สุนัขกับเงา',href:'post-3.html' ,image:'img/img-09.jpg',sum:'ในวันหนึ่ง มีสุนัขตัวหนึ่งกำลังคาบชิ้นเนื้ออยู่ในปากและกำลังข้ามสะพานอยู่ เมื่อเขามองลงไปในแม่น้ำก็พบว่ามีสุนัขอีกตัวกำลังคาบชิ้นเนื้ออยู่ในปากเหมือนกัน...',date:'Nov. 6, 2021'}, 
+                        {name:'ลากับหมาป่า',href:'post-4.html' ,image:'img/img-03.jpg',sum:'ในวันหนึ่ง ขณะที่ลากำลังหากินในทุ่งหญ้า เขาเห็นหมาป่าตัวหนึ่งกำลังมาหาเขา ลาจึงได้แกล้งทำเป็นบาดเจ็บ หมาป่าเข้ามาหาลา...',date:'Nov. 1, 2021'}, 
+                        {name:'เทพเฮอร์มีสกับช่างฝีมือ',href:'post-5.html' ,image:'img/img-04.jpg',sum:'กาลครั้งหนึ่ง เทพเจ้าซุสได้สั่งให้เทพเฮอร์มีส ใช้ “ยาแห่งการโกหก” ให้กับช่างฝีมือทุกคน เฮอร์มีสบดยาแบ่งเท่า ๆ กันแล้วนำไปใส่ให้ช่างฝีมือทีละคน...',date:'Oct. 30, 2021'}, 
+                        {name:'หมาป่ากับคนเลี้ยงแกะ',href:'post-6.html' ,image:'img/img-05.jpg',sum:'เด็กเลี้ยงแกะพบลูกหมาป่า จึงได้เก็บพวกมันมาเลี้ยง “ถ้าฉันเลี้ยงหมาป่าพวกนี้ เมื่อพวกเขาโตขึ้นจะได้ช่วยเลี้ยงแกะทั้งฝูงหรือพวกเขาอาจจะเอาแกะจากฟาร์มอื่นมาด้วยก็ได้”',date:'Oct.27, 2021'}, 
+                        {name:'นกนางแอ่นขี้โม้กับอีกา',href:'post-7.html' ,image:'img/img-06.jpg',sum:'มีนกนางแอ่นและอีกาชวบพูดอวดกันทั้งคู่ หลังจากที่ฟังนกนางแอ่นพูดเกี่ยวกับตัวเองแล้วอีกาก็พูดกลับไปว่า...',date:'Oct. 23, 2021'}, 
+                        {name:'แม่ที่รวยกับผู้หญิงที่ร้องไห้',href:'post-8.html' ,image:'img/img-07.jpg',sum:'มีแม่ที่รวยคนหนึ่งมีลูกสาวสองคน เมื่อลูกสาวคนหนึ่งจากไป...',date:'Oct. 20, 2021'}, 
+                        {name:'หนูกับวัวกระทิง',href:'post-9.html' ,image:'img/img-08.jpg',sum:'เจ้าวัวกระทิงโกรธเมื่อหนูกัดเขา เขาจึงพยายามจับหนู...',date:'Oct. 16, 2021'}, 
+                        {name:'สามีขี้เมากับภรรยาของเขา',href:'post-10.html' ,image:'img/img-10.jpg',sum:'มีภรรยาคนหนึ่งทุกข์ใจจากสามีที่ดื่มเหล้ามากเกินไป เธอต้องการให้เขาเลิกนิสัยไม่ดีนี้ ดังนั้นเธอจึงคิดแผนบางอย่าง...',date:'Oct. 14, 2021'}, 
+                        {name:'มดกับนกพิราบ',href:'post-11.html' ,image:'img/img-11.jpg',sum:'มดตัวหนึ่งลงมาที่น้ำพุเพื่อดื่มน้ำ เขาพลาดท่าตกลงไปในน้ำพุและเกือบจะจมน้ำ นกพิราบที่สังเกตเห็นเหตุการณ์ทั้งหมดได้หักกิ่งไม้เล็ก ๆ...',date:'Oct. 12, 2021'}, 
+                        {name:'ลากับผิวหนังสิงโต',href:'post-12.html' ,image:'img/img-12.jpg',sum:'มีลาตัวหนึ่ง ได้นำผิวหนังสิงโตมาคลุมตัวเองไว้ แล้วเดินไปมาเพื่อคุกคามสัตว์อื่น ๆ หลังจากนั้นไม่นานสุนัขจิ้งจอกก็ปรากฏตัวขึ้น...',date:'Oct. 9, 2021'}, 
+                        {name:'หมาป่ากับคนเลี้ยงแกะ',href:'post-13.html' ,image:'img/img-13.jpg',sum:'มีหมาป่าตัวหนึ่งกำลังเดินติดตามฝูงแกะ แต่เขาไม่ได้โจมตีพวกมัน คนเลี้ยงแกะคิดว่าหมาป่าเป็นภัยคุกคาม ดังนั้นเขาจึงเฝ้าดูแลแกะอย่างกลัวๆ...',date:'Oct. 5, 2021'}, 
+                        {name:'เหยี่ยวดำกับงู',href:'post-14.html' ,image:'img/img-14.jpg',sum:'เหยี่ยวดำจับงูแล้วบินขึ้นไปบนฟ้า งูตัวนั้นพันตัวอยู่รอบ ๆ เหยี่ยวดำ แล้วได้กัดไปที่เหยี่ยวดำด้วย...',date:'Oct. 3, 2021'}, 
+                        {name:'อีกากับเทพเจ้าเฮอร์มีส',href:'post-15.html' ,image:'img/img-15.jpg',sum:'มีอีกาตัวหนึ่ง ติดอยู่ที่กับดัก ได้ขอร้องเทพเจ้าอพอลโลว่า “ถ้าคุณจะช่วยฉันให้พ้นจากกับดักนี้ฉันจะจุดธูปและบูชาคุณ”...',date:'Sep. 28, 2021'}, 
+                        {name:'หงส์ที่เข้าใจผิดว่าตัวเองเป็นห่าน',href:'post-16.html' ,image:'img/img-16.jpg',sum:'เศรษฐีคนหนึ่งได้เลี้ยงทั้งห่านและหงส์ เขาเลี้ยงห่านเพื่อเป็นอาหารในอนาคตของเขา และเลี้ยงหงส์เพื่อส่งเสียงไพเราะ...',date:'Sep. 26, 2021'}, 
+                        {name:'ดอกกุหลาบกับดอกซีโลเซีย',href:'post-17.html' ,image:'img/img-17.jpg',sum:'ดอกซีโลเซียกำลังเบ่งบานอยู่ถัดจากดอกกุหลาบ และได้กล่าวกับดอกกุหลาบว่า...',date:'Sep. 24, 2021'}, 
+                        {name:'นกยูงกับอีกา',href:'post-18.html' ,image:'img/img-18.jpg',sum:'พวกนกทั้งหลายกำลังหารือกันเพื่อเลือกราชาของพวกเขา แล้วนกยูงก็พูดว่า “ฉันสวยดังนั้นฉันต้องเป็นราชา”...',date:'Sep. 18, 2021'}, 
+                        {name:'ปลาทูน่ากับโลมา',href:'post-19.html' ,image:'img/img-19.jpg',sum:'เสียงของปลาทูน่าที่กำลังว่ายน้ำหนีโลมาอย่างหมดหวัง อย่างไรก็ตามโลมากำลังเข้ามาใกล้มากขึ้นเรื่อย ๆ ...',date:'Sep. 16, 2021'}, 
+                        {name:'สุนัขจิ้งจอกกับเสือดาว',href:'post-20.html' ,image:'img/img-20.jpg',sum:'สุนัขจิ้งจอกกับเสือดาวกำลังโต้เถียงกัน ว่าใครสวยงามกว่ากัน...',date:'Sep. 13, 2021'}, 
+                        {name:'กบสองตัว',href:'post-21.html' ,image:'img/img-21.jpg',sum:'มีกบสองตัวอาศัยอยู่ในละแวกนั้น หนึ่งในนั้นอาศัยอยู่ริมสระน้ำลึกและใหญ่ห่างจากถนนเล็กน้อย...',date:'Sep. 8, 2021'}, 
+                        {name:'กากับเชือก',href:'post-22.html' ,image:'img/img-22.jpg',sum:'ชายคนหนึ่งจับอีกาได้ และได้ให้กับลูกของเขา โดยที่ใช้สายจูงผูกขาของมันเอาไว้...',date:'Sep. 6, 2021'}, 
+                        {name:'กาดำกับหงส์ขาว',href:'post-23.html' ,image:'img/img-23.jpg',sum:'เมื่ออีกามองไปที่หงส์ อีกาก็รู้สึกอิจฉาในขนสีขาวเหลือเกิน เขาคิดว่าหงส์ต้องล้างขนของตัวเองด้วยน้ำ...',date:'May 31, 2020'}, 
+                        {name:'เทพเจ้าแห่งสงครามกับเทพีแห่งความรุนแรง',href:'post-24.html' ,image:'img/img-24.jpg',sum:'เทพเจ้าทั้งหมดตัดสินใจที่จะแต่งงานและแต่ละคนก็เลือกคู่ของเขาโดยการจับฉลาก...',date:'June 16, 2020'}];
+            let options = {
+            shouldSort: true,
+            keys: ["name"],
+            threshold: 0.6,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            // don't include the keys property
+            };
+
+            const fuse = new Fuse(list, options);
+
+            let results = fuse.search(search.value);
+            console.log(results)
+
+            result.innerHTML=""
+            var listLength = results.length;
+            for (var i = 0; i < listLength; i++) {
+            result.innerHTML = result.innerHTML + `
+                <article class="col-12 col-md-6 tm-post">
+                    <hr class="tm-hr-primary">
+                    <a href="${results[i].item.href}" class="effect-lily tm-post-link tm-pt-20">
+                        <div class="tm-post-link-inner">
+                            <img src="${results[i].item.image}" alt="Image" class="img-fluid">                            
+                        </div>
+                        <span class="position-absolute tm-new-badge">New</span>
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">${results[i].item.name}</h2>
+                    </a>                    
+                    <p class="tm-pt-30">
+                        ${results[i].item.sum}
+                    </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        <span class="tm-color-primary"></span>
+                        <span class="tm-color-primary">${results[i].item.date}</span>
+                    </div>
+                    <hr>   
+                </article>`
+            //Do something
+}
+// result will be:
+// {"item":"Kelly","refIndex":0}
+// here, refIndex is the index of the element in list
+        })
+    </script>
+</body>
+</html>
